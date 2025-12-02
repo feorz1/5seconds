@@ -9,28 +9,28 @@
 <body>
   <div id="app">
     <div class="player-card">
-      <!-- Кнопка старт (скрывается после первого нажатия) -->
-      <div id="start-screen" class="start-screen">
-        <button id="start-btn" class="primary-btn primary-btn--large">
-          🎵 Начать игру
+      <div class="wave-wrapper">
+        <div id="waveform"></div>
+        <div id="timer" class="timer">0:05</div>
+      </div>
+
+      <div id="status" class="status-text"></div>
+
+      <div class="controls-row">
+        <button id="btn-show-title" class="control-btn control-btn-wide">
+          Показать трек
+        </button>
+
+        <button id="btn-replay" class="control-btn control-btn-round">
+          ▶
+        </button>
+
+        <button id="btn-next" class="control-btn control-btn-wide">
+          Следующий трек
         </button>
       </div>
 
-      <!-- Основной интерфейс игры (скрыт до старта) -->
-      <div id="game-screen" class="game-screen hidden">
-        <div class="track-title hidden" id="track-title">Название трека</div>
-        
-        <div class="wave-wrapper">
-          <div id="waveform"></div>
-          <div id="timer" class="timer">0:05</div>
-        </div>
-
-        <div class="bottom-row">
-          <button id="show-title" class="primary-btn">
-            Показать название и дальше
-          </button>
-        </div>
-      </div>
+      <div id="track-title" class="track-title hidden"></div>
     </div>
   </div>
 
