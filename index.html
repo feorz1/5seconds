@@ -9,28 +9,38 @@
 <body>
   <div id="app">
     <div class="player-card">
-      <div class="wave-wrapper">
-        <div id="waveform"></div>
-        <div id="timer" class="timer">0:05</div>
-      </div>
-
-      <div id="status" class="status-text"></div>
-
-      <div class="controls-row">
-        <button id="btn-show-title" class="control-btn control-btn-wide">
-          Показать трек
-        </button>
-
-        <button id="btn-replay" class="control-btn control-btn-round">
-          ▶
-        </button>
-
-        <button id="btn-next" class="control-btn control-btn-wide">
-          Следующий трек
+      <!-- Стартовый экран -->
+      <div id="start-screen" class="start-screen">
+        <button id="start-btn" class="btn-start">
+          🎵 Начать игру
         </button>
       </div>
 
-      <div id="track-title" class="track-title hidden"></div>
+      <!-- Игровой экран -->
+      <div id="game-screen" class="game-screen hidden">
+        <div id="track-title" class="track-title">Название трека</div>
+
+        <div class="wave-wrapper">
+          <div id="waveform"></div>
+          <div id="timer" class="timer">0:05</div>
+        </div>
+
+        <div id="status" class="status-text"></div>
+
+        <div class="controls-row">
+          <button id="btn-show-title" class="control-btn control-btn-wide">
+            Показать трек
+          </button>
+
+          <button id="btn-replay" class="control-btn control-btn-round">
+            ▶
+          </button>
+
+          <button id="btn-next" class="control-btn control-btn-wide">
+            Следующий трек
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
