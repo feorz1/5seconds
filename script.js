@@ -2,13 +2,17 @@
 const tracks = [
   { src: 'tracks/track1.mp3', title: 'Трек 1' },
   { src: 'tracks/track2.mp3', title: 'Трек 2' },
-  // { src: 'tracks/...mp3', title: '...' },
+  { src: 'tracks/track3.mp3', title: 'Трек 3' },
 ];
 
 let current = 0;
+let gameStarted = false;
 const titleDiv = document.getElementById('track-title');
 const showTitleBtn = document.getElementById('show-title');
 const timerDiv = document.getElementById('timer');
+const startBtn = document.getElementById('start-btn');
+const startScreen = document.getElementById('start-screen');
+const gameScreen = document.getElementById('game-screen');
 
 const SHOW_SECONDS = 5;
 let timerInterval = null;
@@ -80,8 +84,10 @@ function loadTrack(idx) {
 }
 
 wavesurfer.on('ready', () => {
-  wavesurfer.play();
-  startTimer();
+  if (gameStarted) {
+    wavesurfer.play();
+    startTimer();
+  }
 });
 
 function nextTrack() {
@@ -92,9 +98,13 @@ function nextTrack() {
 
 showTitleBtn.addEventListener('click', () => {
   titleDiv.classList.remove('hidden');
-  // даём игрокам 1.5 секунды посмотреть и переходим дальше
   setTimeout(nextTrack, 1500);
 });
 
-// Стартуем с первого трека
-loadTrack(current);
+// Кнопка старта
+startBtn.addEventListener('click', () => {
+  gameStarted = true;
+  startScreen.classList.add('hidden');
+  gameScreen.classList.remove('hidden');
+  loadTrack(current);
+});
