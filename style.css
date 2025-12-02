@@ -8,7 +8,6 @@
   --bg: #050509;
   --card-bg: #11131a;
   --accent: #1db954;
-  --accent-soft: rgba(29, 185, 84, 0.16);
   --text: #f5f5f5;
   --muted: #6f7687;
   --radius-lg: 32px;
@@ -21,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at top, #1c2435 0, #050509 58%);
+  background: radial-gradient(circle at top, #0d1117 0, #010409 60%);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
     "Segoe UI", sans-serif;
   color: var(--text);
@@ -29,52 +28,119 @@ body {
 
 #app {
   width: 100%;
-  max-width: 760px;
-  padding: 16px;
+  max-width: 900px;
+  padding: 20px;
 }
 
 .player-card {
-  background: radial-gradient(circle at top left, #171c29 0, #080a10 65%);
+  background: linear-gradient(145deg, #0d1117 0, #010409 100%);
   border-radius: var(--radius-lg);
-  padding: 28px 32px 26px;
+  padding: 40px 48px;
   box-shadow:
-    0 26px 60px rgba(0, 0, 0, 0.85),
-    0 0 0 1px rgba(255, 255, 255, 0.03);
+    0 30px 70px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+/* Стартовый экран */
+
+.start-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+}
+
+.start-screen.hidden,
+.game-screen.hidden {
+  display: none;
+}
+
+.btn-start {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  padding: 18px 42px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #020305;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.12s ease-out,
+    filter 0.12s ease-out;
+}
+
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(0, 0, 0, 0.6);
+  filter: brightness(1.06);
+}
+
+.btn-start:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(0, 0, 0, 0.7);
+}
+
+/* Название трека сверху */
+
+.track-title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 32px;
+  min-height: 54px;
+  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
+}
+
+.track-title.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Волна + таймер */
 
 .wave-wrapper {
-  background: radial-gradient(circle at top left, #20263a 0, #0b0e18 58%);
+  background: radial-gradient(circle at top left, #161b22 0, #0d1117 65%);
   border-radius: 24px;
-  padding: 18px 18px 16px;
+  padding: 20px;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 16px 40px rgba(0, 0, 0, 0.7);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 18px 45px rgba(0, 0, 0, 0.8);
 }
 
 #waveform {
   width: 100%;
-  height: 96px;
+  height: 110px;
 }
 
 .timer {
-  margin-top: 10px;
+  margin-top: 14px;
   text-align: center;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: var(--accent);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 /* Надпись "Время вышло!" */
 
 .status-text {
-  margin-top: 18px;
+  margin-top: 22px;
+  margin-bottom: 6px;
   text-align: center;
-  min-height: 24px;
-  font-size: 20px;
+  min-height: 28px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--accent);
 }
@@ -82,11 +148,11 @@ body {
 /* Кнопки управления */
 
 .controls-row {
-  margin-top: 18px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 20px;
 }
 
 .control-btn {
@@ -96,10 +162,11 @@ body {
   background: var(--accent);
   color: #020305;
   font-weight: 600;
+  font-size: 16px;
   letter-spacing: 0.02em;
   box-shadow:
-    0 10px 26px rgba(0, 0, 0, 0.85),
-    0 0 0 1px rgba(0, 0, 0, 0.45);
+    0 12px 28px rgba(0, 0, 0, 0.88),
+    0 0 0 1px rgba(0, 0, 0, 0.5);
   transition:
     transform 0.1s ease-out,
     box-shadow 0.1s ease-out,
@@ -108,16 +175,16 @@ body {
 
 .control-btn-wide {
   flex: 1;
-  padding: 12px 20px;
+  padding: 14px 24px;
   border-radius: 999px;
 }
 
 .control-btn-round {
-  width: 64px;
-  height: 64px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   flex: 0 0 auto;
-  font-size: 26px;
+  font-size: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,43 +193,33 @@ body {
 .control-btn:hover {
   transform: translateY(-1px);
   box-shadow:
-    0 16px 32px rgba(0, 0, 0, 0.95),
+    0 16px 36px rgba(0, 0, 0, 0.95),
     0 0 0 1px rgba(0, 0, 0, 0.6);
-  filter: brightness(1.04);
+  filter: brightness(1.05);
 }
 
 .control-btn:active {
   transform: translateY(1px) scale(0.98);
   box-shadow:
-    0 8px 18px rgba(0, 0, 0, 0.9),
+    0 8px 20px rgba(0, 0, 0, 0.9),
     0 0 0 1px rgba(0, 0, 0, 0.7);
-}
-
-/* Название трека */
-
-.track-title {
-  margin-top: 18px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--text);
-  transition: opacity 0.18s ease-out, visibility 0.18s ease-out;
-}
-
-.track-title.hidden {
-  opacity: 0;
-  visibility: hidden;
 }
 
 /* Адаптив */
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .player-card {
-    padding: 22px 16px 20px;
+    padding: 28px 24px;
+  }
+
+  .track-title {
+    font-size: 32px;
+    margin-bottom: 24px;
   }
 
   .controls-row {
     flex-direction: column;
+    gap: 14px;
   }
 
   .control-btn-wide,
@@ -172,7 +229,7 @@ body {
   }
 
   .control-btn-round {
-    height: 52px;
-    font-size: 22px;
+    height: 56px;
+    font-size: 24px;
   }
 }
