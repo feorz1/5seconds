@@ -62,7 +62,7 @@ body {
 
 #app {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -74,6 +74,7 @@ body {
 
 .main-title {
   margin: 0;
+  margin-bottom: 60px;
   font-size: 56px;
   font-weight: 800;
   color: #ffffff;
@@ -203,11 +204,9 @@ body {
 /* Кнопки управления */
 
 .controls-row {
-  margin-top: 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 80px;
 }
 
 .control-btn {
@@ -243,7 +242,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 6px;
+  padding-left: 10px;
 }
 
 .control-btn:hover {
