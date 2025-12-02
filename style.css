@@ -1,69 +1,104 @@
-body {
-  background: radial-gradient(ellipse at center, #1a212b 0%, #090b14 100%);
-  color: #f8f8ff;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
+
+:root {
+  --bg: #050509;
+  --card-bg: #11131a;
+  --accent: #1db954;
+  --text: #f5f5f5;
+  --muted: #858b98;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #1b2233 0, #050509 55%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  color: var(--text);
+}
+
 #app {
   width: 100%;
   max-width: 640px;
   padding: 16px;
 }
+
 .player-card {
   background: linear-gradient(145deg, #101320, #090b11);
-  border-radius: 24px;
-  padding: 24px 24px 20px;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px 24px;
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(255, 255, 255, 0.02);
 }
-.wave-wrapper {
-  background: radial-gradient(circle at top left, #202538 0, #0b0e16 60%);
-  border-radius: 18px;
-  padding: 16px 12px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
-  margin-top: 20px;
-  margin-bottom: 0;
-}
-#waveform {
-  width: 100%;
-  height: 68px;
-}
-#timer {
-  text-align: center;
-  margin: 12px 0 8px 0;
-  font-size: 20px;
-  font-weight: 600;
-  color: #1db954;
-  text-shadow: 0 2px 12px #111 0.35;
-  letter-spacing: 0.06em;
-}
-.info-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 18px;
-}
+
+/* Название трека сверху */
 .track-title {
   text-align: center;
-  font-size: 36px;
-  margin-bottom: 32px;
-  color: #fff;
+  font-size: 32px;
   font-weight: 500;
-  transition: opacity 0.25s, visibility 0.25s;
+  color: var(--text);
+  margin-bottom: 24px;
+  min-height: 42px;
+  transition: opacity 0.2s ease-out, visibility 0.2s ease-out;
 }
+
 .track-title.hidden {
   opacity: 0;
   visibility: hidden;
-  height: 0;
 }
+
+/* Блок волны + таймер */
+.wave-wrapper {
+  background: radial-gradient(circle at top left, #202538 0, #0b0e16 60%);
+  border-radius: 18px;
+  padding: 16px 12px 14px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  margin-bottom: 20px;
+}
+
+#waveform {
+  width: 100%;
+  height: 88px;
+}
+
+.timer {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Нижняя строка: кнопка */
+.bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Кнопка */
 .primary-btn {
   border: none;
   cursor: pointer;
   font: inherit;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #1db954, #46e283);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--accent), #46e283);
   color: #020305;
   font-weight: 600;
+  font-size: 15px;
   letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
@@ -75,30 +110,37 @@ body {
     transform 0.1s ease-out,
     box-shadow 0.1s ease-out,
     filter 0.1s ease-out;
+  white-space: nowrap;
 }
+
 .primary-btn:hover {
   transform: translateY(-1px);
   box-shadow:
     0 14px 32px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(0,0,0,0.4);
+    0 0 0 1px rgba(0, 0, 0, 0.4);
   filter: brightness(1.05);
 }
+
 .primary-btn:active {
   transform: translateY(1px) scale(0.99);
   box-shadow:
     0 6px 16px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(0,0,0,0.5);
+    0 0 0 1px rgba(0, 0, 0, 0.5);
 }
-@media (max-width: 480px) {
-  .info-row {
-    flex-direction: column-reverse;
-    align-items: stretch;
+
+/* Адаптив */
+@media (max-width: 520px) {
+  .player-card {
+    padding: 24px 20px 20px;
   }
+
+  .track-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
   .primary-btn {
     width: 100%;
     justify-content: center;
-  }
-  .track-title {
-    text-align: center;
   }
 }
