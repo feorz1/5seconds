@@ -1,8 +1,27 @@
-<!-- index.html -->
-<div id="app">
-  <div id="waveform"></div>
-  <button id="show-title">Показать название</button>
-  <div id="track-title" style="display:none"></div>
-</div>
-<script src="https://unpkg.com/wavesurfer.js"></script>
-<script src="main.js"></script>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Угадай мелодию за 5 секунд</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="player-card">
+      <div class="wave-wrapper">
+        <div id="waveform"></div>
+      </div>
+      <div class="info-row">
+        <div id="track-title" class="track-title hidden"></div>
+        <button id="show-title" class="primary-btn">
+          Показать название и дальше
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/wavesurfer.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
