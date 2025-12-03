@@ -28,9 +28,18 @@
       <div id="game-screen" class="game-screen hidden">
         <div id="track-title" class="track-title">Название трека</div>
 
-        <div class="wave-wrapper">
+        <!-- Контейнер для волны -->
+        <div id="wave-container" class="wave-wrapper">
           <div id="waveform"></div>
           <div id="timer" class="timer">0:00</div>
+        </div>
+
+        <!-- Контейнер для видео -->
+        <div id="video-container" class="video-wrapper hidden">
+          <video id="video-player" class="video-player" playsinline>
+            <source src="" type="video/mp4">
+          </video>
+          <div id="video-timer" class="timer">0:00</div>
         </div>
 
         <div id="status" class="status-text"></div>
