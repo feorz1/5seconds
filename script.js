@@ -12,14 +12,16 @@ const tracks = [
   { src: "tracks/track11.mp3", title: "Жиган-лимон Михаил Круг" },
   { src: "tracks/track12.mp3", title: "My Favourite Game The Cardigans" },
   { src: "tracks/track13.mp3", title: "Money, Money, Money ABBA" },
-  { src: "tracks/track14.mp3", title: "BFG Division Mick Gordon" },
+  { src: "tracks/track14.mp3", title: "BFG Division Mick Gordon", isVideo: true, videoSrc: "tracks/track14.mp4" },
 ];
 
 let currentIndex = 0;
 let gameStarted = false;
 let timerInterval = null;
+let videoTimerInterval = null;
 
 const timerEl = document.getElementById("timer");
+const videoTimerEl = document.getElementById("video-timer");
 const statusEl = document.getElementById("status");
 const titleEl = document.getElementById("track-title");
 
@@ -30,6 +32,10 @@ const gameScreen = document.getElementById("game-screen");
 const btnShowTitle = document.getElementById("btn-show-title");
 const btnReplay = document.getElementById("btn-replay");
 const btnNext = document.getElementById("btn-next");
+
+const waveContainer = document.getElementById("wave-container");
+const videoContainer = document.getElementById("video-container");
+const videoPlayer = document.getElementById("video-player");
 
 const wavesurfer = WaveSurfer.create({
   container: "#waveform",
@@ -48,6 +54,10 @@ function clearTimer() {
   if (timerInterval) {
     clearInterval(timerInterval);
     timerInterval = null;
+  }
+  if (videoTimerInterval) {
+    clearInterval(videoTimerInterval);
+    videoTimerInterval = null;
   }
 }
 
@@ -69,8 +79,19 @@ function startTimer() {
   }, 200);
 }
 
+function startVideoTimer() {
+  clearTimer();
+  statusEl.textContent = "";
+
+  videoTimerInterval = setInterval(() => {
+    const current = videoPlayer.currentTime;
+    videoTimerEl.textContent = formatTime(current);
+  }, 200);
+}
+
 function resetTimerDisplay() {
   timerEl.textContent = "0:00";
+  videoTimerEl.textContent = "0:00";
 }
 
 function loadTrack(index) {
@@ -78,18 +99,35 @@ function loadTrack(index) {
   if (!track) return;
 
   clearTimer();
-  wavesurfer.empty();
-
+  
   titleEl.classList.add("hidden");
   titleEl.textContent = track.title;
   statusEl.textContent = "";
   resetTimerDisplay();
 
-  wavesurfer.load(track.src);
+  // Если это видео-трек
+  if (track.isVideo) {
+    waveContainer.classList.add("hidden");
+    videoContainer.classList.remove("hidden");
+    
+    wavesurfer.empty();
+    videoPlayer.src = track.videoSrc;
+    videoPlayer.load();
+  } else {
+    // Обычный аудио-трек
+    videoContainer.classList.add("hidden");
+    waveContainer.classList.remove("hidden");
+    
+    videoPlayer.pause();
+    videoPlayer.src = "";
+    wavesurfer.empty();
+    wavesurfer.load(track.src);
+  }
 }
 
+// События Wavesurfer
 wavesurfer.on("ready", () => {
-  if (gameStarted) {
+  if (gameStarted && !tracks[currentIndex].isVideo) {
     wavesurfer.play();
     startTimer();
   }
@@ -98,6 +136,19 @@ wavesurfer.on("ready", () => {
 wavesurfer.on("finish", () => {
   clearTimer();
   timerEl.textContent = formatTime(wavesurfer.getDuration());
+});
+
+// События Video
+videoPlayer.addEventListener("loadeddata", () => {
+  if (gameStarted && tracks[currentIndex].isVideo) {
+    videoPlayer.play();
+    startVideoTimer();
+  }
+});
+
+videoPlayer.addEventListener("ended", () => {
+  clearTimer();
+  videoTimerEl.textContent = formatTime(videoPlayer.duration);
 });
 
 function nextTrack() {
@@ -118,11 +169,19 @@ btnShowTitle.addEventListener("click", () => {
 });
 
 btnReplay.addEventListener("click", () => {
-  if (!tracks[currentIndex]) return;
-  wavesurfer.stop();
-  resetTimerDisplay();
-  wavesurfer.play();
-  startTimer();
+  const track = tracks[currentIndex];
+  if (!track) return;
+
+  if (track.isVideo) {
+    videoPlayer.currentTime = 0;
+    videoPlayer.play();
+    startVideoTimer();
+  } else {
+    wavesurfer.stop();
+    resetTimerDisplay();
+    wavesurfer.play();
+    startTimer();
+  }
 });
 
 btnNext.addEventListener("click", () => {
