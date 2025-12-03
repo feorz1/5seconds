@@ -202,9 +202,13 @@ body {
 
 .video-player {
   width: 100%;
+  min-height: 200px;
+  max-height: 600px;
   height: auto;
   border-radius: 16px;
   display: block;
+  background: #000;
+  object-fit: contain;
 }
 
 .timer {
@@ -302,6 +306,11 @@ body {
   .track-title {
     font-size: 32px;
     margin-bottom: 24px;
+  }
+
+  .video-player {
+    min-height: 150px;
+    max-height: 400px;
   }
 
   .controls-row {
