@@ -100,16 +100,17 @@ function loadTrack(index) {
 
   clearTimer();
   
-  // СНАЧАЛА скрываем название, ПОТОМ обновляем текст
+  // Скрываем название И очищаем текст сразу
   titleEl.classList.add("hidden");
-  
-  // Небольшая задержка перед обновлением текста
-  setTimeout(() => {
-    titleEl.textContent = track.title;
-  }, 50);
+  titleEl.textContent = ""; // Пустой текст сразу!
   
   statusEl.textContent = "";
   resetTimerDisplay();
+
+  // Обновляем текст через задержку
+  setTimeout(() => {
+    titleEl.textContent = track.title;
+  }, 100);
 
   // Если это видео-трек
   if (track.isVideo) {
@@ -119,6 +120,8 @@ function loadTrack(index) {
     wavesurfer.empty();
     videoPlayer.src = track.videoSrc;
     videoPlayer.load();
+    
+    console.log("Загружено видео:", track.videoSrc);
   } else {
     // Обычный аудио-трек
     videoContainer.classList.add("hidden");
@@ -146,10 +149,15 @@ wavesurfer.on("finish", () => {
 
 // События Video
 videoPlayer.addEventListener("loadeddata", () => {
+  console.log("Видео готово к воспроизведению");
   if (gameStarted && tracks[currentIndex].isVideo) {
     videoPlayer.play();
     startVideoTimer();
   }
+});
+
+videoPlayer.addEventListener("error", (e) => {
+  console.error("Ошибка загрузки видео:", e);
 });
 
 videoPlayer.addEventListener("ended", () => {
