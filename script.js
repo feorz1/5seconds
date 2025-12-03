@@ -8,7 +8,7 @@ const tracks = [
   { src: "tracks/track7.mp3", title: "Белая ночь Форум" },
   { src: "tracks/track8.mp3", title: "Ночь Андрей Губин" },
   { src: "tracks/track9.mp3", title: "Седьмой лепесток Hi-Fi" },
-  { src: "tracks/track10 .mp3", title: "Still Loving You Scorpions" },
+  { src: "tracks/track10.mp3", title: "Still Loving You Scorpions" },
   { src: "tracks/track11.mp3", title: "Жиган-лимон Михаил Круг" },
   { src: "tracks/track12.mp3", title: "My Favourite Game The Cardigans" },
   { src: "tracks/track13.mp3", title: "Money, Money, Money ABBA" },
